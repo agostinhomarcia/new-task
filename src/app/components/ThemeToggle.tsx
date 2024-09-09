@@ -6,7 +6,12 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
+    // Aplicar ou remover a classe 'dark' no HTML quando o estado mudar
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, [isDark]);
 
   return (

@@ -2,17 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-bg-light: #ffffff;
-  --color-text-light: #000000;
-}
-
-.dark {
-  --color-bg-light: #1a202c;
-  --color-text-light: #ffffff;
-}
-
+/* Definindo cores padrão (tema claro) */
 body {
   background-color: var(--color-bg-light);
   color: var(--color-text-light);
+}
+
+/* Quando o tema "dark" está ativado, sobrepõe as variáveis */
+:root {
+  --color-bg-light: #ffffff; /* Fundo claro */
+  --color-text-light: #000000; /* Texto claro */
+}
+
+.dark body {
+  background-color: #1a202c; /* Fundo escuro */
+  color: #ffffff; /* Texto escuro */
 }

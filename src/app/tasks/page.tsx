@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import TaskItem from "../components/TaskItem";
-import ThemeToggle from "../components/ThemeToggle";
 
 interface Task {
   id: number;
@@ -14,20 +13,29 @@ interface Task {
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"all" | "completed" | "pending">("all");
 
+  // Buscar tarefas do backend
   useEffect(() => {
     fetch("http://localhost:3001/tasks")
       .then((res) => res.json())
       .then((data) => setTasks(data));
   }, []);
 
+  // Adicionar uma nova tarefa
   const addTask = () => {
+    if (newTaskTitle.trim() === "") {
+      setError("O título da tarefa não pode estar vazio.");
+      return;
+    }
+
     const newTask = {
       title: newTaskTitle,
       dueDate: new Date().toISOString(),
       completed: false,
     };
+
     fetch("http://localhost:3001/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -37,9 +45,11 @@ export default function Tasks() {
       .then((task) => {
         setTasks((prevTasks) => [...prevTasks, task]);
         setNewTaskTitle("");
+        setError(null);
       });
   };
 
+  // Deletar uma tarefa
   const deleteTask = (id: number) => {
     fetch(`http://localhost:3001/tasks/${id}`, {
       method: "DELETE",
@@ -48,6 +58,7 @@ export default function Tasks() {
     });
   };
 
+  // Alternar status de conclusão da tarefa
   const toggleComplete = (id: number) => {
     const task = tasks.find((t) => t.id === id);
     if (task) {
@@ -64,7 +75,23 @@ export default function Tasks() {
         });
     }
   };
-
+  const editTask = (id: number, newTitle: string) => {
+    const task = tasks.find((t) => t.id === id);
+    if (task) {
+      fetch(`http://localhost:3001/tasks/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...task, title: newTitle }),
+      })
+        .then((res) => res.json())
+        .then((updatedTask) => {
+          setTasks((prevTasks) =>
+            prevTasks.map((t) => (t.id === updatedTask.id ? updatedTask : t))
+          );
+        });
+    }
+  };
+  // Filtrar tarefas
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") return task.completed;
     if (filter === "pending") return !task.completed;
@@ -72,16 +99,14 @@ export default function Tasks() {
   });
 
   return (
-    <div className="container mx-auto p-4 flex flex-col items-center">
+    <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Gerenciamento de Tarefas</h1>
-
-      <ThemeToggle />
 
       <div className="mb-4">
         <input
           type="text"
           placeholder="Nova tarefa"
-          className="border p-2 rounded mr-2"
+          className="border p-2 rounded mr-2 text-slate-700"
           value={newTaskTitle}
           onChange={(e) => setNewTaskTitle(e.target.value)}
         />
@@ -92,6 +117,8 @@ export default function Tasks() {
           Adicionar
         </button>
       </div>
+
+      {error && <p className="text-red-500">{error}</p>}
 
       <div className="mb-4">
         <button
@@ -114,13 +141,14 @@ export default function Tasks() {
         </button>
       </div>
 
-      <ul className="w-full max-w-md">
+      <ul>
         {filteredTasks.map((task) => (
           <TaskItem
             key={task.id}
             task={task}
             onToggleComplete={() => toggleComplete(task.id)}
             onDelete={() => deleteTask(task.id)}
+            onEdit={(newTitle) => editTask(task.id, newTitle)}
           />
         ))}
       </ul>

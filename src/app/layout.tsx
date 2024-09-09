@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./styles/globals.css";
 import Navbar from "./components/Navbar";
 
-// Atualizando o título e a descrição
 export const metadata: Metadata = {
   title: "Todo List App",
   description: "Aplicação de lista de tarefas com Next.js",
