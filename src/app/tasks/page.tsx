@@ -98,8 +98,8 @@ export default function Tasks() {
   });
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Gerenciamento de Tarefas</h1>
+    <div className="container  p-4 flex flex-col items-center justify-center h-screen">
+      <h1 className="text-2xl font-bold mb-8">Gerenciamento de Tarefas</h1>
 
       <div className="mb-4">
         <input
