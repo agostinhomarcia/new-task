@@ -16,14 +16,14 @@ export default function Tasks() {
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"all" | "completed" | "pending">("all");
 
-  // Buscar tarefas do backend
+  const apiBaseUrl = "https://back-new-task.vercel.app";
+
   useEffect(() => {
-    fetch("http://localhost:3001/tasks")
+    fetch(`${apiBaseUrl}/tasks`)
       .then((res) => res.json())
       .then((data) => setTasks(data));
   }, []);
 
-  // Adicionar uma nova tarefa
   const addTask = () => {
     if (newTaskTitle.trim() === "") {
       setError("O título da tarefa não pode estar vazio.");
@@ -36,7 +36,7 @@ export default function Tasks() {
       completed: false,
     };
 
-    fetch("http://localhost:3001/tasks", {
+    fetch(`${apiBaseUrl}/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTask),
@@ -49,20 +49,18 @@ export default function Tasks() {
       });
   };
 
-  // Deletar uma tarefa
   const deleteTask = (id: number) => {
-    fetch(`http://localhost:3001/tasks/${id}`, {
+    fetch(`${apiBaseUrl}/tasks/${id}`, {
       method: "DELETE",
     }).then(() => {
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     });
   };
 
-  // Alternar status de conclusão da tarefa
   const toggleComplete = (id: number) => {
     const task = tasks.find((t) => t.id === id);
     if (task) {
-      fetch(`http://localhost:3001/tasks/${id}`, {
+      fetch(`${apiBaseUrl}/tasks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...task, completed: !task.completed }),
@@ -75,10 +73,11 @@ export default function Tasks() {
         });
     }
   };
+
   const editTask = (id: number, newTitle: string) => {
     const task = tasks.find((t) => t.id === id);
     if (task) {
-      fetch(`http://localhost:3001/tasks/${id}`, {
+      fetch(`${apiBaseUrl}/tasks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...task, title: newTitle }),
@@ -91,7 +90,7 @@ export default function Tasks() {
         });
     }
   };
-  // Filtrar tarefas
+
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") return task.completed;
     if (filter === "pending") return !task.completed;
