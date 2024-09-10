@@ -5,6 +5,9 @@ import Navbar from "./components/Navbar";
 export const metadata: Metadata = {
   title: "Todo List App",
   description: "Aplicação de lista de tarefas com Next.js",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

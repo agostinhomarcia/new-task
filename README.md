@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gerenciador de Tarefas
 
-## Getting Started
+## Introdução
 
-First, run the development server:
+Este é um Gerenciador de Tarefas desenvolvido utilizando **Next.js/React** no front-end e **Node.js** no back-end. O objetivo principal é permitir que os usuários possam criar, editar, concluir e excluir tarefas de forma eficiente. A aplicação foi projetada para ser responsiva, proporcionando uma excelente experiência tanto em dispositivos móveis quanto em desktops.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tabela de Conteúdos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Instalação](#instalação)
+- [Uso](#uso)
+- [Recursos](#recursos)
+- [Dependências](#dependências)
+- [Configuração](#configuração)
+- [Exemplos](#exemplos)
+- [Contribuidores](#contribuidores)
+- [Licença](#licença)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Instalação
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Requisitos
 
-## Learn More
+- **Node.js** (versão 14 ou superior)
+- **npm** ou **yarn**
 
-To learn more about Next.js, take a look at the following resources:
+### Passos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/gerenciador-de-tarefas.git
+   cd gerenciador-de-tarefas
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Front-end
 
-## Deploy on Vercel
+cd frontend
+npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Back-end
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+cd ../backend
+npm install
+
+##### Uso
+
+Após a instalação, você pode acessar a aplicação abrindo o navegador e navegando até `http://localhost:3000` .
+
+O front-end será servido no ambiente de desenvolvimento, permitindo a criação, edição, conclusão e exclusão de tarefas de forma intuitiva.
+
+##### Recursos
+
+Front-end com Next.js/React: Interface responsiva e moderna.
+
+Tailwind CSS: Estilização ágil e personalizada para uma UI limpa e organizada.
+
+CRUD de Tarefas: Crie, edite, marque como concluída e exclua tarefas.
+
+Back-end com Node.js/Express: API robusta para gerenciamento de tarefas.
+
+Deploy na Vercel: Integração contínua e deploy automático utilizando Vercel para escalabilidade e performance.
+
+##### Dependências
+
+Front-end
+Next.js
+React
+Tailwind CSS
+Back-end
+Node.js
+Express
+
+#### Configuração
+
+Para o funcionamento correto da API no back-end, será necessário configurar variáveis de ambiente. Crie um arquivo .env no diretório backend com as seguintes informações:
+
+##### Exemplo de variáveis de ambiente
+
+DATABASE_URL=your-database-url
+PORT=5000
+
+Se você estiver utilizando uma base de dados externa, configure a URL do banco de dados para conectar corretamente.
+
+##### Contribuidores
+
+[Márcia](https://www.linkedin.com/in/marcia-agostinho-developer/)
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+#### Licença
+
+Este projeto está licenciado sob a licença [MIT]().

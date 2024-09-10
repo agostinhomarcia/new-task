@@ -98,49 +98,63 @@ export default function Tasks() {
   });
 
   return (
-    <div className="container  p-4 flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-8">Gerenciamento de Tarefas</h1>
+    <div className="container max-w-3xl mx-auto p-4 flex flex-col items-center">
+      <h1 className="text-3xl font-bold mb-8 text-white text-center">
+        Gerenciamento de Tarefas
+      </h1>
 
-      <div className="mb-4">
+      <div className="mb-4 flex flex-col sm:flex-row w-full gap-4">
         <input
           type="text"
           placeholder="Nova tarefa"
-          className="border p-2 rounded mr-2 text-slate-700"
+          className="flex-1 border p-2 rounded-md text-slate-700"
           value={newTaskTitle}
           onChange={(e) => setNewTaskTitle(e.target.value)}
         />
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors w-full sm:w-auto"
           onClick={addTask}
         >
           Adicionar
         </button>
       </div>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <div className="mb-4">
+      <div className="mb-4 flex justify-center space-x-4 flex-wrap gap-2">
         <button
-          className={`mr-2 ${filter === "all" ? "font-bold" : ""}`}
+          className={`px-4 py-2 rounded-md ${
+            filter === "all"
+              ? "bg-blue-600 text-white border border-blue-600"
+              : "bg-gray-300 text-gray-800"
+          }`}
           onClick={() => setFilter("all")}
         >
           Todas
         </button>
         <button
-          className={`mr-2 ${filter === "completed" ? "font-bold" : ""}`}
+          className={`px-4 py-2 rounded-md ${
+            filter === "completed"
+              ? "bg-blue-600 text-white border border-blue-600"
+              : "bg-gray-300 text-gray-800"
+          }`}
           onClick={() => setFilter("completed")}
         >
           Concluídas
         </button>
         <button
-          className={`${filter === "pending" ? "font-bold" : ""}`}
+          className={`px-4 py-2 rounded-md ${
+            filter === "pending"
+              ? "bg-blue-600 text-white border border-blue-600"
+              : "bg-gray-300 text-gray-800"
+          }`}
           onClick={() => setFilter("pending")}
         >
           Pendentes
         </button>
       </div>
 
-      <ul>
+      <ul className="w-full space-y-4">
         {filteredTasks.map((task) => (
           <TaskItem
             key={task.id}
