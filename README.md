@@ -32,13 +32,15 @@ Este é um Gerenciador de Tarefas desenvolvido utilizando **Next.js/React** no f
 
 # Front-end
 
-cd frontend
+```cd frontend
 npm install
+```
 
 # Back-end
 
-cd ../backend
+```cd ../backend
 npm install
+```
 
 ##### Uso
 
@@ -74,8 +76,10 @@ Para o funcionamento correto da API no back-end, será necessário configurar va
 
 ##### Exemplo de variáveis de ambiente
 
+```
 DATABASE_URL=your-database-url
 PORT=5000
+```
 
 Se você estiver utilizando uma base de dados externa, configure a URL do banco de dados para conectar corretamente.
 
